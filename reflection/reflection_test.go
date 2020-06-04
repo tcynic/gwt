@@ -19,17 +19,25 @@ func TestWalk(t *testing.T) {
 			}{"Chris"},
 			[]string{"Chris"},
 		},
+		{
+			"Struct with two strings",
+			struct {
+				Name string
+				city string
+			}{"Chris", "London"},
+			[]string{"Chris", "London"},
+		},
 	}
 
 	for _, test := range cases {
 		t.Run(test.Name, func(t *testing.T) {
 			var got []string
 			walk(test.Input, func(input string) {
-				got = append(got, imput)
+				got = append(got, input)
 			})
 
 			if !reflect.DeepEqual(got, test.ExpectedCalls) {
-				t.Errorf("got %v want %v, got test.ExpectedCalls")
+				t.Errorf("got %v want %v", got, test.ExpectedCalls)
 			}
 		})
 	}
